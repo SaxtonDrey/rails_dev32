@@ -1,6 +1,7 @@
 # rails_dev32
 vagrant env with serverspec for rails
-this include
+
+this box include
 - Rails
 - SQLite
 - Git
