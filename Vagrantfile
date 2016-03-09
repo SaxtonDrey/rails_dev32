@@ -36,7 +36,7 @@ Vagrant.configure(2) do |config|
   # the path on the host to the actual folder. The second argument is
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
-  # config.vm.synced_folder "./", "/home/vagrant"
+  config.vm.synced_folder "./", "/home/vagrant"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
@@ -69,6 +69,13 @@ Vagrant.configure(2) do |config|
                shift
                    apt-get -y install "$@" >/dev/null 2>&1
      }
+     
+     echo adding swap file
+     fallocate -l 2G /swapfile
+     chmod 600 /swapfile
+     mkswap /swapfile
+     swapon /swapfile
+     echo '/swapfile none swap defaults 0 0' >> /etc/fstab
 
      echo updating package information
      apt-add-repository -y ppa:brightbox/ruby-ng >/dev/null 2>&1
@@ -84,6 +91,11 @@ Vagrant.configure(2) do |config|
      gem install bundler -N >/dev/null 2>&1
      install Git git
      install SQLite sqlite3 libsqlite3-dev
+     install Redis redis-server
+     install Imagemagick imagemagick libmagick++-dev
+     debconf-set-selections <<< 'mysql-server mysql-server/root_password password root'
+     debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password root'
+     install MySQL mysql-server libmysqlclient-dev
      install 'Nokogiri dependencies' libxml2 libxml2-dev libxslt1-dev zlib1g-dev
      install 'ExecJS runtime' nodejs
      echo 'Installing rails'
