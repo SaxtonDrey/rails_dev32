@@ -30,4 +30,4 @@ and go to [http://localhost:3000](http://localhost:3000)
 ## synced_folder
 guest: ~/rails
 
-host:  ./rails .
+host:  ./rails 
