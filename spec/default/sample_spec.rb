@@ -1,18 +1,22 @@
 require 'spec_helper'
 
-
-describe package('apache2'), :if => os[:family] == 'ubuntu' do
-  it { should be_installed }
+describe package('redis-server') do
+    it { should be_installed }
 end
-
-
-describe service('apache2'), :if => os[:family] == 'ubuntu' do
-  it { should be_enabled }
-  it { should be_running }
+describe package('imagemagick') do
+    it { should be_installed }
 end
-
-describe command('rails -v') do
-    its(:exit_status) { should eq 0 }
+describe package('git') do
+    it { should be_installed }
+end
+describe package('nodejs') do
+    it { should be_installed }
+end
+describe package('sqlite3') do
+    it { should be_installed }
+end
+describe package('rails') do
+    it { should be_installed.by('gem') }
 end
 
 describe file ('/home/vagrant/rails') do

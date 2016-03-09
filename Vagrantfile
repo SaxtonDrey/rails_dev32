@@ -93,9 +93,6 @@ Vagrant.configure(2) do |config|
      install SQLite sqlite3 libsqlite3-dev
      install Redis redis-server
      install Imagemagick imagemagick libmagick++-dev
-     debconf-set-selections <<< 'mysql-server mysql-server/root_password password root'
-     debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password root'
-     install MySQL mysql-server libmysqlclient-dev
      install 'Nokogiri dependencies' libxml2 libxml2-dev libxslt1-dev zlib1g-dev
      install 'ExecJS runtime' nodejs
      echo 'Installing rails'
